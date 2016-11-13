@@ -1,0 +1,55 @@
+syntax="proto2";
+package khero;
+
+enum Msg
+{
+  Login_Request		= 0x000010001;
+  Login_Response	= 0x000010002;
+
+  Welcom_Notification	= 0x000020001;
+}
+
+
+message Command
+{
+  //包含所有的XXXCommand消息
+}
+
+message Request
+{
+  //包含所有的XXXRequest消息
+  optional LoginRequest login	= 1;
+}
+
+message Response
+{
+  required bool result		= 1; // true表示应答成功，false表示应答失败
+  required bool last_response	= 2; // 一个请求可以包含多个应答，用于指示是否是最后一个应答
+  optional bytes error_describe	= 3; // result为false时，描述错误信息
+  //包含所有的Response消息
+  optional LoginResponse login	= 4;
+}
+
+message Notification
+{
+  //包含所有的Notification消息
+  optional WelcomeNotification welcome = 1;
+}
+
+
+message LoginRequest
+{
+  required bytes username	= 1;
+  required string password	= 2;
+}
+
+message LoginResponse
+{
+  required fixed32 token	= 1;
+}
+
+
+message WelcomeNotification
+{
+  required bytes text		= 1;
+}
