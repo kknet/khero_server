@@ -5,6 +5,7 @@ from select import *
 from ctypes import *
 import struct
 
+from MsgHandler import *
 from Log import *
 
 class Net:
@@ -71,11 +72,9 @@ class Net:
                     data = sock.recv(1024)
                     if data:
                         Log().d("收到数据：" + str(data) + "客户端:" + str(sock.getpeername()))
-			while data:
-                            self.read_buf[sock] += data
-                            data = sock.recv(1024)
+                        self.read_buf[sock] += data
 			while len(self.read_buf[sock]) >= 4:
-                            data_len = struct.unpack('!I', self.read_buf[sock])[0]
+                            data_len = struct.unpack('!I', self.read_buf[sock][0:4])[0]
                             if len(self.read_buf[sock]) >= data_len:
                                 packet_data = self.read_buf[sock][4:data_len]
                                 self.read_buf[sock] = self.read_buf[sock][data_len:]
@@ -83,9 +82,11 @@ class Net:
                                 msg["fd"] = fd
                                 msg["epl"] = self.epl
                                 msg["wbuf"] = self.write_buf[sock]
-                                msg["id"] = struct.unpack('!I', packet_data)[0]
+				msg["id"] = struct.unpack('!I', packet_data[0:4])[0]
                                 msg["data"] = packet_data
 				MsgHandler().handleMsg(msg)
+                            else:
+                                break
                     else:
                         Log().d("连接关闭，客户端：" + str(sock.getpeername()))
                         self.epl.unregister(fd)
