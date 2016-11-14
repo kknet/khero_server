@@ -1,22 +1,24 @@
 #coding: utf-8
 
 from Singleton import *
+from abc import *
 
 
 class Module:
-    def __init__(self):
-        self.moduleId = 0
+    def __init__(self, moduleId):
+        self.moduleId = moduleId
 
-    def procMsg(msg):
-        return 
+    @abstractmethod
+    def procMsg(self, msg):
+        pass
 
 
 @singleton
 class MsgHandler:
     def __init__(self):
-	self.modules = {0 : Module()}
+	self.modules = {}
 
-    def registerModule(module):
+    def registerModule(self, module):
         self.modules[module.moduleId] = module
 
     def handleMsg(self, msg):

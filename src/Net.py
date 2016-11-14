@@ -2,7 +2,8 @@
 
 from socket import *
 from select import *
-import Queue
+from ctypes import *
+import struct
 
 from Log import *
 
@@ -29,7 +30,8 @@ class Net:
         self.epl.register(self.server_sock.fileno(), EPOLLIN)
 
         # 保存客户端消息的字典
-        self.message_queues = {}
+        self.read_buf = {}
+        self.write_buf = {}
 
         # 文件句柄到所对应套接字对象的字典,格式为{句柄：对象}
 	self.fd_to_socket = {self.server_sock.fileno():self.server_sock}
@@ -54,7 +56,8 @@ class Net:
                     # 把新连接的文件句柄保存到字典
                     self.fd_to_socket[conn.fileno()] = conn
                     # 以新连接的对象为键值，值存储在队列中，保存每个连接的信息
-                    self.message_queues[conn] = Queue.Queue()
+                    self.read_buf[conn] = ""
+                    self.write_buf[conn] = ""
 
                 # 关闭事件
                 elif event & EPOLLHUP:
@@ -68,8 +71,21 @@ class Net:
                     data = sock.recv(1024)
                     if data:
                         Log().d("收到数据：" + str(data) + "客户端:" + str(sock.getpeername()))
-                        self.message_queues[sock].put(data)
-                        self.epl.modify(fd, EPOLLOUT)
+			while data:
+                            self.read_buf[sock] += data
+                            data = sock.recv(1024)
+			while len(self.read_buf[sock]) >= 4:
+                            data_len = struct.unpack('!I', self.read_buf[sock])[0]
+                            if len(self.read_buf[sock]) >= data_len:
+                                packet_data = self.read_buf[sock][4:data_len]
+                                self.read_buf[sock] = self.read_buf[sock][data_len:]
+                                msg = {}
+                                msg["fd"] = fd
+                                msg["epl"] = self.epl
+                                msg["wbuf"] = self.write_buf[sock]
+                                msg["id"] = struct.unpack('!I', packet_data)[0]
+                                msg["data"] = packet_data
+				MsgHandler().handleMsg(msg)
                     else:
                         Log().d("连接关闭，客户端：" + str(sock.getpeername()))
                         self.epl.unregister(fd)
@@ -77,17 +93,15 @@ class Net:
                         del self.fd_to_socket[fd]
                 # 可写事件
                 elif event & EPOLLOUT:
-                    try:
-                        msg = self.message_queues[sock].get_nowait()
-                    except Queue.Empty:
-                        self.epl.modify(fd, EPOLLIN)
-                    else:
+                    if len(self.write_buf[sock]) > 0:
+                        sock.send(self.write_buf[sock])
+                        self.write_buf[sock] = ""
                         Log().d("发送数据:" + str(data) + "客户端:" + str(sock.getpeername()))
-                        sock.send(msg)
+                    else:
+                        self.epl.modify(fd, EPOLLIN)
         self.epl.unregister(self.server_sock.fileno())
         self.epl.close()
         self.server_sock.close()
-
 
 
 

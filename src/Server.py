@@ -4,12 +4,16 @@ from os import *
 from Log import *
 from Net import *
 
+from BaseModule import *
+
 class Server:
     def __init__(self):
         self._ip = "192.168.0.102"
         self._port = 8888
         self._timeout = 10
         self._net = Net(self._ip, self._port, self._timeout)
+        basemodule = BaseModule(0x00010000)
+	MsgHandler().registerModule(basemodule)
 
     def run(self):
         self._net.run()
