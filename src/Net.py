@@ -8,6 +8,7 @@ import struct
 from MsgHandler import *
 from Log import *
 
+
 class Net:
     def __init__(self, ip, port, timeout):
         # 创建服务端socket
@@ -31,7 +32,7 @@ class Net:
         self.epl.register(self.server_sock.fileno(), EPOLLIN)
 
         # 保存客户端消息的字典
-        self.msg_map = {}
+        self.user_map = {}
 
         # 文件句柄到所对应套接字对象的字典,格式为{句柄：对象}
 	self.fd_to_socket = {self.server_sock.fileno():self.server_sock}
@@ -39,10 +40,13 @@ class Net:
 
     def run(self):
         while self.run_flag:
-            events = self.epl.poll(self.timeout)
-            if not events:
+            try:
+                events = self.epl.poll(self.timeout)
+                if not events:
+                    continue
+	    except:
                 continue
-            
+
             for fd, event in events:
                 sock = self.fd_to_socket[fd]
                 # 如果活动socket为当前服务socket，表示有新的连接
@@ -56,12 +60,12 @@ class Net:
                     # 把新连接的文件句柄保存到字典
                     self.fd_to_socket[conn.fileno()] = conn
                     # 以新连接的对象为键值，值存储在队列中，保存每个连接的信息
-                    msg = {}
-                    msg["fd"] = conn.fileno()
-                    msg["rbuf"] = ""
-                    msg["wbuf"] = ""
-                    msg["epl"] = self.epl
-                    self.msg_map[conn] = msg
+                    user_data = {}
+                    user_data["fd"] = conn.fileno()
+                    user_data["rbuf"] = ""
+                    user_data["wbuf"] = ""
+                    user_data["epl"] = self.epl
+                    self.user_map[conn] = user_data
 
                 # 关闭事件
                 elif event & EPOLLHUP:
@@ -74,40 +78,40 @@ class Net:
                     # 接收数据
                     data = sock.recv(1024)
                     if data:
-                        Log().d("收到数据：" + str(data) + "客户端:" + str(sock.getpeername()))
-                        self.msg_map[sock]["rbuf"] += data
-                        bufdata = self.msg_map[sock]["rbuf"]
+                        Log().d("收到数据,客户端:" + str(sock.getpeername()))
+                        self.user_map[sock]["rbuf"] += data
+                        bufdata = self.user_map[sock]["rbuf"]
 			while len(bufdata) >= 8:
+                            msg_id = struct.unpack('!I', bufdata[0:4])[0]
                             data_len = struct.unpack('!I', bufdata[4:8])[0]
                             if len(bufdata) >= data_len:
                                 packet_data = bufdata[8:data_len]
-                                self.msg_map[sock]["rbuf"] = bufdata[data_len:]
-                                bufdata = self.msg_map[sock]["rbuf"]
-                                msg = self.msg_map[sock]
-				msg["id"] = struct.unpack('!I', bufdata[0:4])[0]
-                                msg["data"] = packet_data
-                                print "处理消息"
-				MsgHandler().handleMsg(msg)
+                                self.user_map[sock]["rbuf"] = bufdata[data_len:]
+                                bufdata = self.user_map[sock]["rbuf"]
+                                user_data = self.user_map[sock]
+				user_data["msg_id"] = msg_id
+                                user_data["msg_data"] = packet_data
+				MsgHandler().handleMsg(user_data)
                             else:
                                 break
                     else:
                         Log().d("连接关闭，客户端：" + str(sock.getpeername()))
                         self.epl.unregister(fd)
-                        self.msg_map.pop(sock)
-                        sock.close()
-                        
+                        self.user_map.pop(sock)
+                        sock.close()                        
                         del self.fd_to_socket[fd]
                 # 可写事件
                 elif event & EPOLLOUT:
-                    if len(self.msg_map[sock]["wbuf"]) > 0:
-                        sock.send(self.msg_map[sock]["wbuf"])
-                        self.msg_map[sock]["wbuf"] = ""
-                        Log().d("发送数据:" + str(data) + "客户端:" + str(sock.getpeername()))
+                    if len(self.user_map[sock]["wbuf"]) > 0:
+                        sock.send(self.user_map[sock]["wbuf"])
+                        self.user_map[sock]["wbuf"] = ""
+                        Log().d("发送数据,客户端:" + str(sock.getpeername()))
                     else:
                         self.epl.modify(fd, EPOLLIN)
-        self.epl.unregister(self.server_sock.fileno())
+        for fd in self.fd_to_socket:
+            self.epl.unregister(fd)
+            self.fd_to_socket[fd].close()
         self.epl.close()
-        self.server_sock.close()
 
 
 
