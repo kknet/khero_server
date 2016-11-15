@@ -22,6 +22,6 @@ class MsgHandler:
         self.modules[module.moduleId] = module
 
     def handleMsg(self, msg):
-        module = self.modules[msg.id & 0xFFFF0000]
+        module = self.modules[msg["id"] & 0xFFFF0000]
         if module is not None:
             module.procMsg(msg)
