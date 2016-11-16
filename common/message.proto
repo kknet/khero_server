@@ -1,5 +1,6 @@
 syntax="proto2";
 package khero;
+option java_package="com.kongyt.khero.messages";
 
 enum Msg
 {
@@ -39,7 +40,7 @@ message Notification
 
 message LoginRequest
 {
-  required bytes username	= 1;
+  required string username	= 1;
   required string password	= 2;
 }
 
