@@ -17,6 +17,12 @@ class BaseModule(Module):
     def procMsg(self, user_data):
         if user_data["msg_id"] == Login_Request:
             self.onLoginRequest(user_data)
+        elif user_data["msg_id"] == Register_Request:
+            self.onRegisterRequest(user_data)
+        elif user_data["msg_id"] == Debug_Command:
+            self.onDebugCommand(user_data)
+        else:
+            Log().d("No function to response msg.(msgid=" + str(msg_id) + ")")
 
     # 响应登录请求消息
     def onLoginRequest(self, user_data):
