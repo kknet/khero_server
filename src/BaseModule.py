@@ -29,7 +29,7 @@ class BaseModule(Module):
         req = Request()
         req.ParseFromString(user_data["msg_data"])
         if req.HasField('login'):
-            Log().d('OnLoginRequest(' + req.login.username +"," + req.login.password + ")")
+            Log().d('onLoginRequest(' + req.login.username +"," + req.login.password + ")")
             res = Response()
             res.result = True
             res.last_response = True
@@ -54,7 +54,7 @@ class BaseModule(Module):
         cmd = Command()
         cmd.ParseFromString(user_data["msg_data"])
         if cmd.HasField('debug'):
-            Log().d('onDebugCommand(' + cmd.command + ")")
+            Log().d('onDebugCommand(' + cmd.debug.command + ")")
             notify = Notification()
             notify.welcome.text = "Welcome, i received your debug command!"
 
