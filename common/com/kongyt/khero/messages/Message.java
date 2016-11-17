@@ -503,23 +503,36 @@ public final class Message {
      *包含所有的XXXRequest消息
      * </pre>
      *
-     * <code>optional .khero.LoginRequest login = 1;</code>
+     * <code>optional .khero.RegisterRequest register = 1;</code>
+     */
+    boolean hasRegister();
+    /**
+     * <pre>
+     *包含所有的XXXRequest消息
+     * </pre>
+     *
+     * <code>optional .khero.RegisterRequest register = 1;</code>
+     */
+    com.kongyt.khero.messages.Message.RegisterRequest getRegister();
+    /**
+     * <pre>
+     *包含所有的XXXRequest消息
+     * </pre>
+     *
+     * <code>optional .khero.RegisterRequest register = 1;</code>
+     */
+    com.kongyt.khero.messages.Message.RegisterRequestOrBuilder getRegisterOrBuilder();
+
+    /**
+     * <code>optional .khero.LoginRequest login = 2;</code>
      */
     boolean hasLogin();
     /**
-     * <pre>
-     *包含所有的XXXRequest消息
-     * </pre>
-     *
-     * <code>optional .khero.LoginRequest login = 1;</code>
+     * <code>optional .khero.LoginRequest login = 2;</code>
      */
     com.kongyt.khero.messages.Message.LoginRequest getLogin();
     /**
-     * <pre>
-     *包含所有的XXXRequest消息
-     * </pre>
-     *
-     * <code>optional .khero.LoginRequest login = 1;</code>
+     * <code>optional .khero.LoginRequest login = 2;</code>
      */
     com.kongyt.khero.messages.Message.LoginRequestOrBuilder getLoginOrBuilder();
   }
@@ -566,8 +579,21 @@ public final class Message {
               break;
             }
             case 10: {
-              com.kongyt.khero.messages.Message.LoginRequest.Builder subBuilder = null;
+              com.kongyt.khero.messages.Message.RegisterRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = register_.toBuilder();
+              }
+              register_ = input.readMessage(com.kongyt.khero.messages.Message.RegisterRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(register_);
+                register_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.kongyt.khero.messages.Message.LoginRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = login_.toBuilder();
               }
               login_ = input.readMessage(com.kongyt.khero.messages.Message.LoginRequest.PARSER, extensionRegistry);
@@ -575,7 +601,7 @@ public final class Message {
                 subBuilder.mergeFrom(login_);
                 login_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -603,16 +629,16 @@ public final class Message {
     }
 
     private int bitField0_;
-    public static final int LOGIN_FIELD_NUMBER = 1;
-    private com.kongyt.khero.messages.Message.LoginRequest login_;
+    public static final int REGISTER_FIELD_NUMBER = 1;
+    private com.kongyt.khero.messages.Message.RegisterRequest register_;
     /**
      * <pre>
      *包含所有的XXXRequest消息
      * </pre>
      *
-     * <code>optional .khero.LoginRequest login = 1;</code>
+     * <code>optional .khero.RegisterRequest register = 1;</code>
      */
-    public boolean hasLogin() {
+    public boolean hasRegister() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
@@ -620,17 +646,38 @@ public final class Message {
      *包含所有的XXXRequest消息
      * </pre>
      *
-     * <code>optional .khero.LoginRequest login = 1;</code>
+     * <code>optional .khero.RegisterRequest register = 1;</code>
      */
-    public com.kongyt.khero.messages.Message.LoginRequest getLogin() {
-      return login_ == null ? com.kongyt.khero.messages.Message.LoginRequest.getDefaultInstance() : login_;
+    public com.kongyt.khero.messages.Message.RegisterRequest getRegister() {
+      return register_ == null ? com.kongyt.khero.messages.Message.RegisterRequest.getDefaultInstance() : register_;
     }
     /**
      * <pre>
      *包含所有的XXXRequest消息
      * </pre>
      *
-     * <code>optional .khero.LoginRequest login = 1;</code>
+     * <code>optional .khero.RegisterRequest register = 1;</code>
+     */
+    public com.kongyt.khero.messages.Message.RegisterRequestOrBuilder getRegisterOrBuilder() {
+      return register_ == null ? com.kongyt.khero.messages.Message.RegisterRequest.getDefaultInstance() : register_;
+    }
+
+    public static final int LOGIN_FIELD_NUMBER = 2;
+    private com.kongyt.khero.messages.Message.LoginRequest login_;
+    /**
+     * <code>optional .khero.LoginRequest login = 2;</code>
+     */
+    public boolean hasLogin() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .khero.LoginRequest login = 2;</code>
+     */
+    public com.kongyt.khero.messages.Message.LoginRequest getLogin() {
+      return login_ == null ? com.kongyt.khero.messages.Message.LoginRequest.getDefaultInstance() : login_;
+    }
+    /**
+     * <code>optional .khero.LoginRequest login = 2;</code>
      */
     public com.kongyt.khero.messages.Message.LoginRequestOrBuilder getLoginOrBuilder() {
       return login_ == null ? com.kongyt.khero.messages.Message.LoginRequest.getDefaultInstance() : login_;
@@ -642,6 +689,12 @@ public final class Message {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (hasRegister()) {
+        if (!getRegister().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       if (hasLogin()) {
         if (!getLogin().isInitialized()) {
           memoizedIsInitialized = 0;
@@ -655,7 +708,10 @@ public final class Message {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, getLogin());
+        output.writeMessage(1, getRegister());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, getLogin());
       }
       unknownFields.writeTo(output);
     }
@@ -667,7 +723,11 @@ public final class Message {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getLogin());
+          .computeMessageSize(1, getRegister());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getLogin());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -686,6 +746,11 @@ public final class Message {
       com.kongyt.khero.messages.Message.Request other = (com.kongyt.khero.messages.Message.Request) obj;
 
       boolean result = true;
+      result = result && (hasRegister() == other.hasRegister());
+      if (hasRegister()) {
+        result = result && getRegister()
+            .equals(other.getRegister());
+      }
       result = result && (hasLogin() == other.hasLogin());
       if (hasLogin()) {
         result = result && getLogin()
@@ -702,6 +767,10 @@ public final class Message {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasRegister()) {
+        hash = (37 * hash) + REGISTER_FIELD_NUMBER;
+        hash = (53 * hash) + getRegister().hashCode();
+      }
       if (hasLogin()) {
         hash = (37 * hash) + LOGIN_FIELD_NUMBER;
         hash = (53 * hash) + getLogin().hashCode();
@@ -820,17 +889,24 @@ public final class Message {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getRegisterFieldBuilder();
           getLoginFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
+        if (registerBuilder_ == null) {
+          register_ = null;
+        } else {
+          registerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
         if (loginBuilder_ == null) {
           login_ = null;
         } else {
           loginBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -857,6 +933,14 @@ public final class Message {
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
+        }
+        if (registerBuilder_ == null) {
+          result.register_ = register_;
+        } else {
+          result.register_ = registerBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
         if (loginBuilder_ == null) {
           result.login_ = login_;
@@ -905,6 +989,9 @@ public final class Message {
 
       public Builder mergeFrom(com.kongyt.khero.messages.Message.Request other) {
         if (other == com.kongyt.khero.messages.Message.Request.getDefaultInstance()) return this;
+        if (other.hasRegister()) {
+          mergeRegister(other.getRegister());
+        }
         if (other.hasLogin()) {
           mergeLogin(other.getLogin());
         }
@@ -914,6 +1001,11 @@ public final class Message {
       }
 
       public final boolean isInitialized() {
+        if (hasRegister()) {
+          if (!getRegister().isInitialized()) {
+            return false;
+          }
+        }
         if (hasLogin()) {
           if (!getLogin().isInitialized()) {
             return false;
@@ -941,17 +1033,17 @@ public final class Message {
       }
       private int bitField0_;
 
-      private com.kongyt.khero.messages.Message.LoginRequest login_ = null;
+      private com.kongyt.khero.messages.Message.RegisterRequest register_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.kongyt.khero.messages.Message.LoginRequest, com.kongyt.khero.messages.Message.LoginRequest.Builder, com.kongyt.khero.messages.Message.LoginRequestOrBuilder> loginBuilder_;
+          com.kongyt.khero.messages.Message.RegisterRequest, com.kongyt.khero.messages.Message.RegisterRequest.Builder, com.kongyt.khero.messages.Message.RegisterRequestOrBuilder> registerBuilder_;
       /**
        * <pre>
        *包含所有的XXXRequest消息
        * </pre>
        *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.RegisterRequest register = 1;</code>
        */
-      public boolean hasLogin() {
+      public boolean hasRegister() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
@@ -959,7 +1051,153 @@ public final class Message {
        *包含所有的XXXRequest消息
        * </pre>
        *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      public com.kongyt.khero.messages.Message.RegisterRequest getRegister() {
+        if (registerBuilder_ == null) {
+          return register_ == null ? com.kongyt.khero.messages.Message.RegisterRequest.getDefaultInstance() : register_;
+        } else {
+          return registerBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       *包含所有的XXXRequest消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      public Builder setRegister(com.kongyt.khero.messages.Message.RegisterRequest value) {
+        if (registerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          register_ = value;
+          onChanged();
+        } else {
+          registerBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXRequest消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      public Builder setRegister(
+          com.kongyt.khero.messages.Message.RegisterRequest.Builder builderForValue) {
+        if (registerBuilder_ == null) {
+          register_ = builderForValue.build();
+          onChanged();
+        } else {
+          registerBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXRequest消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      public Builder mergeRegister(com.kongyt.khero.messages.Message.RegisterRequest value) {
+        if (registerBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              register_ != null &&
+              register_ != com.kongyt.khero.messages.Message.RegisterRequest.getDefaultInstance()) {
+            register_ =
+              com.kongyt.khero.messages.Message.RegisterRequest.newBuilder(register_).mergeFrom(value).buildPartial();
+          } else {
+            register_ = value;
+          }
+          onChanged();
+        } else {
+          registerBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXRequest消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      public Builder clearRegister() {
+        if (registerBuilder_ == null) {
+          register_ = null;
+          onChanged();
+        } else {
+          registerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXRequest消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      public com.kongyt.khero.messages.Message.RegisterRequest.Builder getRegisterBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getRegisterFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *包含所有的XXXRequest消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      public com.kongyt.khero.messages.Message.RegisterRequestOrBuilder getRegisterOrBuilder() {
+        if (registerBuilder_ != null) {
+          return registerBuilder_.getMessageOrBuilder();
+        } else {
+          return register_ == null ?
+              com.kongyt.khero.messages.Message.RegisterRequest.getDefaultInstance() : register_;
+        }
+      }
+      /**
+       * <pre>
+       *包含所有的XXXRequest消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterRequest register = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.kongyt.khero.messages.Message.RegisterRequest, com.kongyt.khero.messages.Message.RegisterRequest.Builder, com.kongyt.khero.messages.Message.RegisterRequestOrBuilder> 
+          getRegisterFieldBuilder() {
+        if (registerBuilder_ == null) {
+          registerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.kongyt.khero.messages.Message.RegisterRequest, com.kongyt.khero.messages.Message.RegisterRequest.Builder, com.kongyt.khero.messages.Message.RegisterRequestOrBuilder>(
+                  getRegister(),
+                  getParentForChildren(),
+                  isClean());
+          register_ = null;
+        }
+        return registerBuilder_;
+      }
+
+      private com.kongyt.khero.messages.Message.LoginRequest login_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.kongyt.khero.messages.Message.LoginRequest, com.kongyt.khero.messages.Message.LoginRequest.Builder, com.kongyt.khero.messages.Message.LoginRequestOrBuilder> loginBuilder_;
+      /**
+       * <code>optional .khero.LoginRequest login = 2;</code>
+       */
+      public boolean hasLogin() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       public com.kongyt.khero.messages.Message.LoginRequest getLogin() {
         if (loginBuilder_ == null) {
@@ -969,11 +1207,7 @@ public final class Message {
         }
       }
       /**
-       * <pre>
-       *包含所有的XXXRequest消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       public Builder setLogin(com.kongyt.khero.messages.Message.LoginRequest value) {
         if (loginBuilder_ == null) {
@@ -985,15 +1219,11 @@ public final class Message {
         } else {
           loginBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <pre>
-       *包含所有的XXXRequest消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       public Builder setLogin(
           com.kongyt.khero.messages.Message.LoginRequest.Builder builderForValue) {
@@ -1003,19 +1233,15 @@ public final class Message {
         } else {
           loginBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <pre>
-       *包含所有的XXXRequest消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       public Builder mergeLogin(com.kongyt.khero.messages.Message.LoginRequest value) {
         if (loginBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
               login_ != null &&
               login_ != com.kongyt.khero.messages.Message.LoginRequest.getDefaultInstance()) {
             login_ =
@@ -1027,15 +1253,11 @@ public final class Message {
         } else {
           loginBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <pre>
-       *包含所有的XXXRequest消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       public Builder clearLogin() {
         if (loginBuilder_ == null) {
@@ -1044,27 +1266,19 @@ public final class Message {
         } else {
           loginBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <pre>
-       *包含所有的XXXRequest消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       public com.kongyt.khero.messages.Message.LoginRequest.Builder getLoginBuilder() {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         onChanged();
         return getLoginFieldBuilder().getBuilder();
       }
       /**
-       * <pre>
-       *包含所有的XXXRequest消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       public com.kongyt.khero.messages.Message.LoginRequestOrBuilder getLoginOrBuilder() {
         if (loginBuilder_ != null) {
@@ -1075,11 +1289,7 @@ public final class Message {
         }
       }
       /**
-       * <pre>
-       *包含所有的XXXRequest消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginRequest login = 1;</code>
+       * <code>optional .khero.LoginRequest login = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.kongyt.khero.messages.Message.LoginRequest, com.kongyt.khero.messages.Message.LoginRequest.Builder, com.kongyt.khero.messages.Message.LoginRequestOrBuilder> 
@@ -1203,23 +1413,36 @@ public final class Message {
      *包含所有的Response消息
      * </pre>
      *
-     * <code>optional .khero.LoginResponse login = 4;</code>
+     * <code>optional .khero.RegisterResponse register = 4;</code>
+     */
+    boolean hasRegister();
+    /**
+     * <pre>
+     *包含所有的Response消息
+     * </pre>
+     *
+     * <code>optional .khero.RegisterResponse register = 4;</code>
+     */
+    com.kongyt.khero.messages.Message.RegisterResponse getRegister();
+    /**
+     * <pre>
+     *包含所有的Response消息
+     * </pre>
+     *
+     * <code>optional .khero.RegisterResponse register = 4;</code>
+     */
+    com.kongyt.khero.messages.Message.RegisterResponseOrBuilder getRegisterOrBuilder();
+
+    /**
+     * <code>optional .khero.LoginResponse login = 5;</code>
      */
     boolean hasLogin();
     /**
-     * <pre>
-     *包含所有的Response消息
-     * </pre>
-     *
-     * <code>optional .khero.LoginResponse login = 4;</code>
+     * <code>optional .khero.LoginResponse login = 5;</code>
      */
     com.kongyt.khero.messages.Message.LoginResponse getLogin();
     /**
-     * <pre>
-     *包含所有的Response消息
-     * </pre>
-     *
-     * <code>optional .khero.LoginResponse login = 4;</code>
+     * <code>optional .khero.LoginResponse login = 5;</code>
      */
     com.kongyt.khero.messages.Message.LoginResponseOrBuilder getLoginOrBuilder();
   }
@@ -1284,8 +1507,21 @@ public final class Message {
               break;
             }
             case 34: {
-              com.kongyt.khero.messages.Message.LoginResponse.Builder subBuilder = null;
+              com.kongyt.khero.messages.Message.RegisterResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = register_.toBuilder();
+              }
+              register_ = input.readMessage(com.kongyt.khero.messages.Message.RegisterResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(register_);
+                register_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 42: {
+              com.kongyt.khero.messages.Message.LoginResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
                 subBuilder = login_.toBuilder();
               }
               login_ = input.readMessage(com.kongyt.khero.messages.Message.LoginResponse.PARSER, extensionRegistry);
@@ -1293,7 +1529,7 @@ public final class Message {
                 subBuilder.mergeFrom(login_);
                 login_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               break;
             }
           }
@@ -1390,16 +1626,16 @@ public final class Message {
       return errorDescribe_;
     }
 
-    public static final int LOGIN_FIELD_NUMBER = 4;
-    private com.kongyt.khero.messages.Message.LoginResponse login_;
+    public static final int REGISTER_FIELD_NUMBER = 4;
+    private com.kongyt.khero.messages.Message.RegisterResponse register_;
     /**
      * <pre>
      *包含所有的Response消息
      * </pre>
      *
-     * <code>optional .khero.LoginResponse login = 4;</code>
+     * <code>optional .khero.RegisterResponse register = 4;</code>
      */
-    public boolean hasLogin() {
+    public boolean hasRegister() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
@@ -1407,17 +1643,38 @@ public final class Message {
      *包含所有的Response消息
      * </pre>
      *
-     * <code>optional .khero.LoginResponse login = 4;</code>
+     * <code>optional .khero.RegisterResponse register = 4;</code>
      */
-    public com.kongyt.khero.messages.Message.LoginResponse getLogin() {
-      return login_ == null ? com.kongyt.khero.messages.Message.LoginResponse.getDefaultInstance() : login_;
+    public com.kongyt.khero.messages.Message.RegisterResponse getRegister() {
+      return register_ == null ? com.kongyt.khero.messages.Message.RegisterResponse.getDefaultInstance() : register_;
     }
     /**
      * <pre>
      *包含所有的Response消息
      * </pre>
      *
-     * <code>optional .khero.LoginResponse login = 4;</code>
+     * <code>optional .khero.RegisterResponse register = 4;</code>
+     */
+    public com.kongyt.khero.messages.Message.RegisterResponseOrBuilder getRegisterOrBuilder() {
+      return register_ == null ? com.kongyt.khero.messages.Message.RegisterResponse.getDefaultInstance() : register_;
+    }
+
+    public static final int LOGIN_FIELD_NUMBER = 5;
+    private com.kongyt.khero.messages.Message.LoginResponse login_;
+    /**
+     * <code>optional .khero.LoginResponse login = 5;</code>
+     */
+    public boolean hasLogin() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional .khero.LoginResponse login = 5;</code>
+     */
+    public com.kongyt.khero.messages.Message.LoginResponse getLogin() {
+      return login_ == null ? com.kongyt.khero.messages.Message.LoginResponse.getDefaultInstance() : login_;
+    }
+    /**
+     * <code>optional .khero.LoginResponse login = 5;</code>
      */
     public com.kongyt.khero.messages.Message.LoginResponseOrBuilder getLoginOrBuilder() {
       return login_ == null ? com.kongyt.khero.messages.Message.LoginResponse.getDefaultInstance() : login_;
@@ -1459,7 +1716,10 @@ public final class Message {
         output.writeBytes(3, errorDescribe_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, getLogin());
+        output.writeMessage(4, getRegister());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, getLogin());
       }
       unknownFields.writeTo(output);
     }
@@ -1483,7 +1743,11 @@ public final class Message {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getLogin());
+          .computeMessageSize(4, getRegister());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getLogin());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1517,6 +1781,11 @@ public final class Message {
         result = result && getErrorDescribe()
             .equals(other.getErrorDescribe());
       }
+      result = result && (hasRegister() == other.hasRegister());
+      if (hasRegister()) {
+        result = result && getRegister()
+            .equals(other.getRegister());
+      }
       result = result && (hasLogin() == other.hasLogin());
       if (hasLogin()) {
         result = result && getLogin()
@@ -1546,6 +1815,10 @@ public final class Message {
       if (hasErrorDescribe()) {
         hash = (37 * hash) + ERROR_DESCRIBE_FIELD_NUMBER;
         hash = (53 * hash) + getErrorDescribe().hashCode();
+      }
+      if (hasRegister()) {
+        hash = (37 * hash) + REGISTER_FIELD_NUMBER;
+        hash = (53 * hash) + getRegister().hashCode();
       }
       if (hasLogin()) {
         hash = (37 * hash) + LOGIN_FIELD_NUMBER;
@@ -1665,6 +1938,7 @@ public final class Message {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getRegisterFieldBuilder();
           getLoginFieldBuilder();
         }
       }
@@ -1676,12 +1950,18 @@ public final class Message {
         bitField0_ = (bitField0_ & ~0x00000002);
         errorDescribe_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (registerBuilder_ == null) {
+          register_ = null;
+        } else {
+          registerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (loginBuilder_ == null) {
           login_ = null;
         } else {
           loginBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -1720,6 +2000,14 @@ public final class Message {
         result.errorDescribe_ = errorDescribe_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
+        }
+        if (registerBuilder_ == null) {
+          result.register_ = register_;
+        } else {
+          result.register_ = registerBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
         }
         if (loginBuilder_ == null) {
           result.login_ = login_;
@@ -1776,6 +2064,9 @@ public final class Message {
         }
         if (other.hasErrorDescribe()) {
           setErrorDescribe(other.getErrorDescribe());
+        }
+        if (other.hasRegister()) {
+          mergeRegister(other.getRegister());
         }
         if (other.hasLogin()) {
           mergeLogin(other.getLogin());
@@ -1966,17 +2257,17 @@ public final class Message {
         return this;
       }
 
-      private com.kongyt.khero.messages.Message.LoginResponse login_ = null;
+      private com.kongyt.khero.messages.Message.RegisterResponse register_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.kongyt.khero.messages.Message.LoginResponse, com.kongyt.khero.messages.Message.LoginResponse.Builder, com.kongyt.khero.messages.Message.LoginResponseOrBuilder> loginBuilder_;
+          com.kongyt.khero.messages.Message.RegisterResponse, com.kongyt.khero.messages.Message.RegisterResponse.Builder, com.kongyt.khero.messages.Message.RegisterResponseOrBuilder> registerBuilder_;
       /**
        * <pre>
        *包含所有的Response消息
        * </pre>
        *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.RegisterResponse register = 4;</code>
        */
-      public boolean hasLogin() {
+      public boolean hasRegister() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
@@ -1984,7 +2275,153 @@ public final class Message {
        *包含所有的Response消息
        * </pre>
        *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      public com.kongyt.khero.messages.Message.RegisterResponse getRegister() {
+        if (registerBuilder_ == null) {
+          return register_ == null ? com.kongyt.khero.messages.Message.RegisterResponse.getDefaultInstance() : register_;
+        } else {
+          return registerBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       *包含所有的Response消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      public Builder setRegister(com.kongyt.khero.messages.Message.RegisterResponse value) {
+        if (registerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          register_ = value;
+          onChanged();
+        } else {
+          registerBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的Response消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      public Builder setRegister(
+          com.kongyt.khero.messages.Message.RegisterResponse.Builder builderForValue) {
+        if (registerBuilder_ == null) {
+          register_ = builderForValue.build();
+          onChanged();
+        } else {
+          registerBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的Response消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      public Builder mergeRegister(com.kongyt.khero.messages.Message.RegisterResponse value) {
+        if (registerBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              register_ != null &&
+              register_ != com.kongyt.khero.messages.Message.RegisterResponse.getDefaultInstance()) {
+            register_ =
+              com.kongyt.khero.messages.Message.RegisterResponse.newBuilder(register_).mergeFrom(value).buildPartial();
+          } else {
+            register_ = value;
+          }
+          onChanged();
+        } else {
+          registerBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的Response消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      public Builder clearRegister() {
+        if (registerBuilder_ == null) {
+          register_ = null;
+          onChanged();
+        } else {
+          registerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的Response消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      public com.kongyt.khero.messages.Message.RegisterResponse.Builder getRegisterBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getRegisterFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *包含所有的Response消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      public com.kongyt.khero.messages.Message.RegisterResponseOrBuilder getRegisterOrBuilder() {
+        if (registerBuilder_ != null) {
+          return registerBuilder_.getMessageOrBuilder();
+        } else {
+          return register_ == null ?
+              com.kongyt.khero.messages.Message.RegisterResponse.getDefaultInstance() : register_;
+        }
+      }
+      /**
+       * <pre>
+       *包含所有的Response消息
+       * </pre>
+       *
+       * <code>optional .khero.RegisterResponse register = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.kongyt.khero.messages.Message.RegisterResponse, com.kongyt.khero.messages.Message.RegisterResponse.Builder, com.kongyt.khero.messages.Message.RegisterResponseOrBuilder> 
+          getRegisterFieldBuilder() {
+        if (registerBuilder_ == null) {
+          registerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.kongyt.khero.messages.Message.RegisterResponse, com.kongyt.khero.messages.Message.RegisterResponse.Builder, com.kongyt.khero.messages.Message.RegisterResponseOrBuilder>(
+                  getRegister(),
+                  getParentForChildren(),
+                  isClean());
+          register_ = null;
+        }
+        return registerBuilder_;
+      }
+
+      private com.kongyt.khero.messages.Message.LoginResponse login_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.kongyt.khero.messages.Message.LoginResponse, com.kongyt.khero.messages.Message.LoginResponse.Builder, com.kongyt.khero.messages.Message.LoginResponseOrBuilder> loginBuilder_;
+      /**
+       * <code>optional .khero.LoginResponse login = 5;</code>
+       */
+      public boolean hasLogin() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       public com.kongyt.khero.messages.Message.LoginResponse getLogin() {
         if (loginBuilder_ == null) {
@@ -1994,11 +2431,7 @@ public final class Message {
         }
       }
       /**
-       * <pre>
-       *包含所有的Response消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       public Builder setLogin(com.kongyt.khero.messages.Message.LoginResponse value) {
         if (loginBuilder_ == null) {
@@ -2010,15 +2443,11 @@ public final class Message {
         } else {
           loginBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <pre>
-       *包含所有的Response消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       public Builder setLogin(
           com.kongyt.khero.messages.Message.LoginResponse.Builder builderForValue) {
@@ -2028,19 +2457,15 @@ public final class Message {
         } else {
           loginBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <pre>
-       *包含所有的Response消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       public Builder mergeLogin(com.kongyt.khero.messages.Message.LoginResponse value) {
         if (loginBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
               login_ != null &&
               login_ != com.kongyt.khero.messages.Message.LoginResponse.getDefaultInstance()) {
             login_ =
@@ -2052,15 +2477,11 @@ public final class Message {
         } else {
           loginBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
-       * <pre>
-       *包含所有的Response消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       public Builder clearLogin() {
         if (loginBuilder_ == null) {
@@ -2069,27 +2490,19 @@ public final class Message {
         } else {
           loginBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       /**
-       * <pre>
-       *包含所有的Response消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       public com.kongyt.khero.messages.Message.LoginResponse.Builder getLoginBuilder() {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
         return getLoginFieldBuilder().getBuilder();
       }
       /**
-       * <pre>
-       *包含所有的Response消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       public com.kongyt.khero.messages.Message.LoginResponseOrBuilder getLoginOrBuilder() {
         if (loginBuilder_ != null) {
@@ -2100,11 +2513,7 @@ public final class Message {
         }
       }
       /**
-       * <pre>
-       *包含所有的Response消息
-       * </pre>
-       *
-       * <code>optional .khero.LoginResponse login = 4;</code>
+       * <code>optional .khero.LoginResponse login = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.kongyt.khero.messages.Message.LoginResponse, com.kongyt.khero.messages.Message.LoginResponse.Builder, com.kongyt.khero.messages.Message.LoginResponseOrBuilder> 
@@ -2812,6 +3221,1110 @@ public final class Message {
     }
 
     public com.kongyt.khero.messages.Message.Notification getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RegisterRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:khero.RegisterRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string username = 1;</code>
+     */
+    boolean hasUsername();
+    /**
+     * <code>required string username = 1;</code>
+     */
+    java.lang.String getUsername();
+    /**
+     * <code>required string username = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUsernameBytes();
+
+    /**
+     * <code>required string password = 2;</code>
+     */
+    boolean hasPassword();
+    /**
+     * <code>required string password = 2;</code>
+     */
+    java.lang.String getPassword();
+    /**
+     * <code>required string password = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getPasswordBytes();
+  }
+  /**
+   * Protobuf type {@code khero.RegisterRequest}
+   */
+  public  static final class RegisterRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:khero.RegisterRequest)
+      RegisterRequestOrBuilder {
+    // Use RegisterRequest.newBuilder() to construct.
+    private RegisterRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RegisterRequest() {
+      username_ = "";
+      password_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RegisterRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              username_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              password_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.kongyt.khero.messages.Message.internal_static_khero_RegisterRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.kongyt.khero.messages.Message.internal_static_khero_RegisterRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.kongyt.khero.messages.Message.RegisterRequest.class, com.kongyt.khero.messages.Message.RegisterRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int USERNAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object username_;
+    /**
+     * <code>required string username = 1;</code>
+     */
+    public boolean hasUsername() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string username = 1;</code>
+     */
+    public java.lang.String getUsername() {
+      java.lang.Object ref = username_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          username_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string username = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUsernameBytes() {
+      java.lang.Object ref = username_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        username_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PASSWORD_FIELD_NUMBER = 2;
+    private volatile java.lang.Object password_;
+    /**
+     * <code>required string password = 2;</code>
+     */
+    public boolean hasPassword() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string password = 2;</code>
+     */
+    public java.lang.String getPassword() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          password_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string password = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPasswordBytes() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        password_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUsername()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPassword()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, password_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, password_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.kongyt.khero.messages.Message.RegisterRequest)) {
+        return super.equals(obj);
+      }
+      com.kongyt.khero.messages.Message.RegisterRequest other = (com.kongyt.khero.messages.Message.RegisterRequest) obj;
+
+      boolean result = true;
+      result = result && (hasUsername() == other.hasUsername());
+      if (hasUsername()) {
+        result = result && getUsername()
+            .equals(other.getUsername());
+      }
+      result = result && (hasPassword() == other.hasPassword());
+      if (hasPassword()) {
+        result = result && getPassword()
+            .equals(other.getPassword());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasUsername()) {
+        hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getUsername().hashCode();
+      }
+      if (hasPassword()) {
+        hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
+        hash = (53 * hash) + getPassword().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.kongyt.khero.messages.Message.RegisterRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code khero.RegisterRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:khero.RegisterRequest)
+        com.kongyt.khero.messages.Message.RegisterRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_RegisterRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_RegisterRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.kongyt.khero.messages.Message.RegisterRequest.class, com.kongyt.khero.messages.Message.RegisterRequest.Builder.class);
+      }
+
+      // Construct using com.kongyt.khero.messages.Message.RegisterRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        username_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        password_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_RegisterRequest_descriptor;
+      }
+
+      public com.kongyt.khero.messages.Message.RegisterRequest getDefaultInstanceForType() {
+        return com.kongyt.khero.messages.Message.RegisterRequest.getDefaultInstance();
+      }
+
+      public com.kongyt.khero.messages.Message.RegisterRequest build() {
+        com.kongyt.khero.messages.Message.RegisterRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.kongyt.khero.messages.Message.RegisterRequest buildPartial() {
+        com.kongyt.khero.messages.Message.RegisterRequest result = new com.kongyt.khero.messages.Message.RegisterRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.username_ = username_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.password_ = password_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.kongyt.khero.messages.Message.RegisterRequest) {
+          return mergeFrom((com.kongyt.khero.messages.Message.RegisterRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.kongyt.khero.messages.Message.RegisterRequest other) {
+        if (other == com.kongyt.khero.messages.Message.RegisterRequest.getDefaultInstance()) return this;
+        if (other.hasUsername()) {
+          bitField0_ |= 0x00000001;
+          username_ = other.username_;
+          onChanged();
+        }
+        if (other.hasPassword()) {
+          bitField0_ |= 0x00000002;
+          password_ = other.password_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUsername()) {
+          return false;
+        }
+        if (!hasPassword()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.kongyt.khero.messages.Message.RegisterRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.kongyt.khero.messages.Message.RegisterRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object username_ = "";
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public boolean hasUsername() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public java.lang.String getUsername() {
+        java.lang.Object ref = username_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            username_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUsernameBytes() {
+        java.lang.Object ref = username_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          username_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public Builder setUsername(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        username_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public Builder clearUsername() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        username_ = getDefaultInstance().getUsername();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public Builder setUsernameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        username_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object password_ = "";
+      /**
+       * <code>required string password = 2;</code>
+       */
+      public boolean hasPassword() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string password = 2;</code>
+       */
+      public java.lang.String getPassword() {
+        java.lang.Object ref = password_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            password_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string password = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPasswordBytes() {
+        java.lang.Object ref = password_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          password_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string password = 2;</code>
+       */
+      public Builder setPassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        password_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string password = 2;</code>
+       */
+      public Builder clearPassword() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        password_ = getDefaultInstance().getPassword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string password = 2;</code>
+       */
+      public Builder setPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        password_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:khero.RegisterRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:khero.RegisterRequest)
+    private static final com.kongyt.khero.messages.Message.RegisterRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.kongyt.khero.messages.Message.RegisterRequest();
+    }
+
+    public static com.kongyt.khero.messages.Message.RegisterRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<RegisterRequest>
+        PARSER = new com.google.protobuf.AbstractParser<RegisterRequest>() {
+      public RegisterRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new RegisterRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RegisterRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RegisterRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public com.kongyt.khero.messages.Message.RegisterRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface RegisterResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:khero.RegisterResponse)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * <pre>
+   * 为空
+   * </pre>
+   *
+   * Protobuf type {@code khero.RegisterResponse}
+   */
+  public  static final class RegisterResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:khero.RegisterResponse)
+      RegisterResponseOrBuilder {
+    // Use RegisterResponse.newBuilder() to construct.
+    private RegisterResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private RegisterResponse() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RegisterResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.kongyt.khero.messages.Message.internal_static_khero_RegisterResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.kongyt.khero.messages.Message.internal_static_khero_RegisterResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.kongyt.khero.messages.Message.RegisterResponse.class, com.kongyt.khero.messages.Message.RegisterResponse.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.kongyt.khero.messages.Message.RegisterResponse)) {
+        return super.equals(obj);
+      }
+      com.kongyt.khero.messages.Message.RegisterResponse other = (com.kongyt.khero.messages.Message.RegisterResponse) obj;
+
+      boolean result = true;
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.RegisterResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.kongyt.khero.messages.Message.RegisterResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * 为空
+     * </pre>
+     *
+     * Protobuf type {@code khero.RegisterResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:khero.RegisterResponse)
+        com.kongyt.khero.messages.Message.RegisterResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_RegisterResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_RegisterResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.kongyt.khero.messages.Message.RegisterResponse.class, com.kongyt.khero.messages.Message.RegisterResponse.Builder.class);
+      }
+
+      // Construct using com.kongyt.khero.messages.Message.RegisterResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_RegisterResponse_descriptor;
+      }
+
+      public com.kongyt.khero.messages.Message.RegisterResponse getDefaultInstanceForType() {
+        return com.kongyt.khero.messages.Message.RegisterResponse.getDefaultInstance();
+      }
+
+      public com.kongyt.khero.messages.Message.RegisterResponse build() {
+        com.kongyt.khero.messages.Message.RegisterResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.kongyt.khero.messages.Message.RegisterResponse buildPartial() {
+        com.kongyt.khero.messages.Message.RegisterResponse result = new com.kongyt.khero.messages.Message.RegisterResponse(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.kongyt.khero.messages.Message.RegisterResponse) {
+          return mergeFrom((com.kongyt.khero.messages.Message.RegisterResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.kongyt.khero.messages.Message.RegisterResponse other) {
+        if (other == com.kongyt.khero.messages.Message.RegisterResponse.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.kongyt.khero.messages.Message.RegisterResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.kongyt.khero.messages.Message.RegisterResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:khero.RegisterResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:khero.RegisterResponse)
+    private static final com.kongyt.khero.messages.Message.RegisterResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.kongyt.khero.messages.Message.RegisterResponse();
+    }
+
+    public static com.kongyt.khero.messages.Message.RegisterResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<RegisterResponse>
+        PARSER = new com.google.protobuf.AbstractParser<RegisterResponse>() {
+      public RegisterResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new RegisterResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RegisterResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RegisterResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public com.kongyt.khero.messages.Message.RegisterResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3545,11 +5058,11 @@ public final class Message {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required fixed32 token = 1;</code>
+     * <code>required int32 token = 1;</code>
      */
     boolean hasToken();
     /**
-     * <code>required fixed32 token = 1;</code>
+     * <code>required int32 token = 1;</code>
      */
     int getToken();
   }
@@ -3596,9 +5109,9 @@ public final class Message {
               }
               break;
             }
-            case 13: {
+            case 8: {
               bitField0_ |= 0x00000001;
-              token_ = input.readFixed32();
+              token_ = input.readInt32();
               break;
             }
           }
@@ -3629,13 +5142,13 @@ public final class Message {
     public static final int TOKEN_FIELD_NUMBER = 1;
     private int token_;
     /**
-     * <code>required fixed32 token = 1;</code>
+     * <code>required int32 token = 1;</code>
      */
     public boolean hasToken() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required fixed32 token = 1;</code>
+     * <code>required int32 token = 1;</code>
      */
     public int getToken() {
       return token_;
@@ -3658,7 +5171,7 @@ public final class Message {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeFixed32(1, token_);
+        output.writeInt32(1, token_);
       }
       unknownFields.writeTo(output);
     }
@@ -3670,7 +5183,7 @@ public final class Message {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFixed32Size(1, token_);
+          .computeInt32Size(1, token_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3935,19 +5448,19 @@ public final class Message {
 
       private int token_ ;
       /**
-       * <code>required fixed32 token = 1;</code>
+       * <code>required int32 token = 1;</code>
        */
       public boolean hasToken() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required fixed32 token = 1;</code>
+       * <code>required int32 token = 1;</code>
        */
       public int getToken() {
         return token_;
       }
       /**
-       * <code>required fixed32 token = 1;</code>
+       * <code>required int32 token = 1;</code>
        */
       public Builder setToken(int value) {
         bitField0_ |= 0x00000001;
@@ -3956,7 +5469,7 @@ public final class Message {
         return this;
       }
       /**
-       * <code>required fixed32 token = 1;</code>
+       * <code>required int32 token = 1;</code>
        */
       public Builder clearToken() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -4018,13 +5531,18 @@ public final class Message {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required bytes text = 1;</code>
+     * <code>required string text = 1;</code>
      */
     boolean hasText();
     /**
-     * <code>required bytes text = 1;</code>
+     * <code>required string text = 1;</code>
      */
-    com.google.protobuf.ByteString getText();
+    java.lang.String getText();
+    /**
+     * <code>required string text = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTextBytes();
   }
   /**
    * Protobuf type {@code khero.WelcomeNotification}
@@ -4038,7 +5556,7 @@ public final class Message {
       super(builder);
     }
     private WelcomeNotification() {
-      text_ = com.google.protobuf.ByteString.EMPTY;
+      text_ = "";
     }
 
     @java.lang.Override
@@ -4070,8 +5588,9 @@ public final class Message {
               break;
             }
             case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              text_ = input.readBytes();
+              text_ = bs;
               break;
             }
           }
@@ -4100,18 +5619,45 @@ public final class Message {
 
     private int bitField0_;
     public static final int TEXT_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString text_;
+    private volatile java.lang.Object text_;
     /**
-     * <code>required bytes text = 1;</code>
+     * <code>required string text = 1;</code>
      */
     public boolean hasText() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bytes text = 1;</code>
+     * <code>required string text = 1;</code>
      */
-    public com.google.protobuf.ByteString getText() {
-      return text_;
+    public java.lang.String getText() {
+      java.lang.Object ref = text_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          text_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string text = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTextBytes() {
+      java.lang.Object ref = text_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        text_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4131,7 +5677,7 @@ public final class Message {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, text_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, text_);
       }
       unknownFields.writeTo(output);
     }
@@ -4142,8 +5688,7 @@ public final class Message {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, text_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, text_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4300,7 +5845,7 @@ public final class Message {
       }
       public Builder clear() {
         super.clear();
-        text_ = com.google.protobuf.ByteString.EMPTY;
+        text_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -4373,7 +5918,9 @@ public final class Message {
       public Builder mergeFrom(com.kongyt.khero.messages.Message.WelcomeNotification other) {
         if (other == com.kongyt.khero.messages.Message.WelcomeNotification.getDefaultInstance()) return this;
         if (other.hasText()) {
-          setText(other.getText());
+          bitField0_ |= 0x00000001;
+          text_ = other.text_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4406,23 +5953,51 @@ public final class Message {
       }
       private int bitField0_;
 
-      private com.google.protobuf.ByteString text_ = com.google.protobuf.ByteString.EMPTY;
+      private java.lang.Object text_ = "";
       /**
-       * <code>required bytes text = 1;</code>
+       * <code>required string text = 1;</code>
        */
       public boolean hasText() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bytes text = 1;</code>
+       * <code>required string text = 1;</code>
        */
-      public com.google.protobuf.ByteString getText() {
-        return text_;
+      public java.lang.String getText() {
+        java.lang.Object ref = text_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            text_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required bytes text = 1;</code>
+       * <code>required string text = 1;</code>
        */
-      public Builder setText(com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString
+          getTextBytes() {
+        java.lang.Object ref = text_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          text_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string text = 1;</code>
+       */
+      public Builder setText(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -4432,11 +6007,24 @@ public final class Message {
         return this;
       }
       /**
-       * <code>required bytes text = 1;</code>
+       * <code>required string text = 1;</code>
        */
       public Builder clearText() {
         bitField0_ = (bitField0_ & ~0x00000001);
         text_ = getDefaultInstance().getText();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string text = 1;</code>
+       */
+      public Builder setTextBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        text_ = value;
         onChanged();
         return this;
       }
@@ -4510,6 +6098,16 @@ public final class Message {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_khero_Notification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_khero_RegisterRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_khero_RegisterRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_khero_RegisterResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_khero_RegisterResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_khero_LoginRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -4533,18 +6131,23 @@ public final class Message {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rmessage.proto\022\005khero\"\t\n\007Command\"-\n\007Req" +
-      "uest\022\"\n\005login\030\001 \001(\0132\023.khero.LoginRequest" +
-      "\"n\n\010Response\022\016\n\006result\030\001 \002(\010\022\025\n\rlast_res" +
-      "ponse\030\002 \002(\010\022\026\n\016error_describe\030\003 \001(\014\022#\n\005l" +
-      "ogin\030\004 \001(\0132\024.khero.LoginResponse\";\n\014Noti" +
-      "fication\022+\n\007welcome\030\001 \001(\0132\032.khero.Welcom" +
-      "eNotification\"2\n\014LoginRequest\022\020\n\010usernam" +
-      "e\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\036\n\rLoginRespon" +
-      "se\022\r\n\005token\030\001 \002(\007\"#\n\023WelcomeNotification" +
-      "\022\014\n\004text\030\001 \002(\014*K\n\003Msg\022\023\n\rLogin_Request\020\201",
-      "\200\004\022\024\n\016Login_Response\020\202\200\004\022\031\n\023Welcom_Notif" +
-      "ication\020\201\200\010B\033\n\031com.kongyt.khero.messages"
+      "\n\rmessage.proto\022\005khero\"\t\n\007Command\"W\n\007Req" +
+      "uest\022(\n\010register\030\001 \001(\0132\026.khero.RegisterR" +
+      "equest\022\"\n\005login\030\002 \001(\0132\023.khero.LoginReque" +
+      "st\"\231\001\n\010Response\022\016\n\006result\030\001 \002(\010\022\025\n\rlast_" +
+      "response\030\002 \002(\010\022\026\n\016error_describe\030\003 \001(\014\022)" +
+      "\n\010register\030\004 \001(\0132\027.khero.RegisterRespons" +
+      "e\022#\n\005login\030\005 \001(\0132\024.khero.LoginResponse\";" +
+      "\n\014Notification\022+\n\007welcome\030\001 \001(\0132\032.khero." +
+      "WelcomeNotification\"5\n\017RegisterRequest\022\020" +
+      "\n\010username\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\022\n\020Re",
+      "gisterResponse\"2\n\014LoginRequest\022\020\n\010userna" +
+      "me\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\036\n\rLoginRespo" +
+      "nse\022\r\n\005token\030\001 \002(\005\"#\n\023WelcomeNotificatio" +
+      "n\022\014\n\004text\030\001 \002(\t*K\n\003Msg\022\023\n\rLogin_Request\020" +
+      "\201\200\004\022\024\n\016Login_Response\020\202\200\004\022\031\n\023Welcom_Noti" +
+      "fication\020\201\200\010B\033\n\031com.kongyt.khero.message" +
+      "s"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4569,33 +6172,45 @@ public final class Message {
     internal_static_khero_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_Request_descriptor,
-        new java.lang.String[] { "Login", });
+        new java.lang.String[] { "Register", "Login", });
     internal_static_khero_Response_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_khero_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_Response_descriptor,
-        new java.lang.String[] { "Result", "LastResponse", "ErrorDescribe", "Login", });
+        new java.lang.String[] { "Result", "LastResponse", "ErrorDescribe", "Register", "Login", });
     internal_static_khero_Notification_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_khero_Notification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_Notification_descriptor,
         new java.lang.String[] { "Welcome", });
-    internal_static_khero_LoginRequest_descriptor =
+    internal_static_khero_RegisterRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_khero_RegisterRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_khero_RegisterRequest_descriptor,
+        new java.lang.String[] { "Username", "Password", });
+    internal_static_khero_RegisterResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_khero_RegisterResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_khero_RegisterResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_khero_LoginRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
     internal_static_khero_LoginRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_LoginRequest_descriptor,
         new java.lang.String[] { "Username", "Password", });
     internal_static_khero_LoginResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_khero_LoginResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_LoginResponse_descriptor,
         new java.lang.String[] { "Token", });
     internal_static_khero_WelcomeNotification_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_khero_WelcomeNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_WelcomeNotification_descriptor,
