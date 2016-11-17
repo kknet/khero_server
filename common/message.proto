@@ -2,18 +2,36 @@ syntax="proto2";
 package khero;
 option java_package="com.kongyt.khero.messages";
 
+
+// 消息ID定义规范
+// 前两个字节为消息模块ID
+// 中间4位为消息类别区别值，0表示普通请求响应消息，1表示Command消息，2表示Notification
+// 最后12位为具体的消息值，Response消息为Request消息ID+1
 enum Msg
 {
-  Login_Request		= 0x000010001;
-  Login_Response	= 0x000010002;
 
-  Welcom_Notification	= 0x000020001;
+  // BaseModule
+  // 所有的Request和Response消息
+  Register_Request	= 0x00010001;
+  Register_Response	= 0x00010002;
+
+  Login_Request		= 0x00010003;
+  Login_Response	= 0x00010004;
+
+
+  // 所有Command消息
+  Debug_Command		= 0x00011001;
+
+
+  // 所有Nitification消息
+  Welcom_Notification	= 0x00012001;
 }
 
 
 message Command
 {
   //包含所有的XXXCommand消息
+  optional DebugCommand	debug	= 1;
 }
 
 message Request
@@ -40,6 +58,17 @@ message Notification
   optional WelcomeNotification welcome = 1;
 }
 
+// ----------------- 所有Command消息定义 -------------------------------
+
+message DebugCommand
+{
+  required string command	= 1;
+}
+
+
+// ----------------- 所有Request和Response消息定义 ---------------------
+
+
 message RegisterRequest
 {
   required string username	= 1;
@@ -62,6 +91,7 @@ message LoginResponse
   required int32 token	= 1;
 }
 
+// ----------------- 所有Nitification消息定义 --------------------------
 
 message WelcomeNotification
 {
