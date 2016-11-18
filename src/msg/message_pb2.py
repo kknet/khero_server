@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='message.proto',
   package='khero',
   syntax='proto2',
-  serialized_pb=_b('\n\rmessage.proto\x12\x05khero\"\t\n\x07\x43ommand\"W\n\x07Request\x12(\n\x08register\x18\x01 \x01(\x0b\x32\x16.khero.RegisterRequest\x12\"\n\x05login\x18\x02 \x01(\x0b\x32\x13.khero.LoginRequest\"\x99\x01\n\x08Response\x12\x0e\n\x06result\x18\x01 \x02(\x08\x12\x15\n\rlast_response\x18\x02 \x02(\x08\x12\x16\n\x0e\x65rror_describe\x18\x03 \x01(\x0c\x12)\n\x08register\x18\x04 \x01(\x0b\x32\x17.khero.RegisterResponse\x12#\n\x05login\x18\x05 \x01(\x0b\x32\x14.khero.LoginResponse\";\n\x0cNotification\x12+\n\x07welcome\x18\x01 \x01(\x0b\x32\x1a.khero.WelcomeNotification\"5\n\x0fRegisterRequest\x12\x10\n\x08username\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\x12\n\x10RegisterResponse\"2\n\x0cLoginRequest\x12\x10\n\x08username\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\x1e\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x02(\x05\"#\n\x13WelcomeNotification\x12\x0c\n\x04text\x18\x01 \x02(\t*K\n\x03Msg\x12\x13\n\rLogin_Request\x10\x81\x80\x04\x12\x14\n\x0eLogin_Response\x10\x82\x80\x04\x12\x19\n\x13Welcom_Notification\x10\x81\x80\x08\x42\x1b\n\x19\x63om.kongyt.khero.messages')
+  serialized_pb=_b('\n\rmessage.proto\x12\x05khero\"-\n\x07\x43ommand\x12\"\n\x05\x64\x65\x62ug\x18\x01 \x01(\x0b\x32\x13.khero.DebugCommand\"W\n\x07Request\x12(\n\x08register\x18\x01 \x01(\x0b\x32\x16.khero.RegisterRequest\x12\"\n\x05login\x18\x02 \x01(\x0b\x32\x13.khero.LoginRequest\"\x99\x01\n\x08Response\x12\x0e\n\x06result\x18\x01 \x02(\x08\x12\x15\n\rlast_response\x18\x02 \x02(\x08\x12\x16\n\x0e\x65rror_describe\x18\x03 \x01(\x0c\x12)\n\x08register\x18\x04 \x01(\x0b\x32\x17.khero.RegisterResponse\x12#\n\x05login\x18\x05 \x01(\x0b\x32\x14.khero.LoginResponse\";\n\x0cNotification\x12+\n\x07welcome\x18\x01 \x01(\x0b\x32\x1a.khero.WelcomeNotification\"\x1f\n\x0c\x44\x65\x62ugCommand\x12\x0f\n\x07\x63ommand\x18\x01 \x02(\t\"5\n\x0fRegisterRequest\x12\x10\n\x08username\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\x12\n\x10RegisterResponse\"2\n\x0cLoginRequest\x12\x10\n\x08username\x18\x01 \x02(\t\x12\x10\n\x08password\x18\x02 \x02(\t\"\x1e\n\rLoginResponse\x12\r\n\x05token\x18\x01 \x02(\x05\"#\n\x13WelcomeNotification\x12\x0c\n\x04text\x18\x01 \x02(\t*\x91\x01\n\x03Msg\x12\x16\n\x10Register_Request\x10\x81\x80\x04\x12\x17\n\x11Register_Response\x10\x82\x80\x04\x12\x13\n\rLogin_Request\x10\x83\x80\x04\x12\x14\n\x0eLogin_Response\x10\x84\x80\x04\x12\x13\n\rDebug_Command\x10\x81\xa0\x04\x12\x19\n\x13Welcom_Notification\x10\x81\xc0\x04\x42\x1b\n\x19\x63om.kongyt.khero.messages')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -31,29 +31,44 @@ _MSG = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='Login_Request', index=0, number=65537,
+      name='Register_Request', index=0, number=65537,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Login_Response', index=1, number=65538,
+      name='Register_Response', index=1, number=65538,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Welcom_Notification', index=2, number=131073,
+      name='Login_Request', index=2, number=65539,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Login_Response', index=3, number=65540,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Debug_Command', index=4, number=69633,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Welcom_Notification', index=5, number=73729,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=537,
-  serialized_end=612,
+  serialized_start=607,
+  serialized_end=752,
 )
 _sym_db.RegisterEnumDescriptor(_MSG)
 
 Msg = enum_type_wrapper.EnumTypeWrapper(_MSG)
-Login_Request = 65537
-Login_Response = 65538
-Welcom_Notification = 131073
+Register_Request = 65537
+Register_Response = 65538
+Login_Request = 65539
+Login_Response = 65540
+Debug_Command = 69633
+Welcom_Notification = 73729
 
 
 
@@ -64,6 +79,13 @@ _COMMAND = _descriptor.Descriptor(
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='debug', full_name='khero.Command.debug', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -77,7 +99,7 @@ _COMMAND = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=24,
-  serialized_end=33,
+  serialized_end=69,
 )
 
 
@@ -114,8 +136,8 @@ _REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=35,
-  serialized_end=122,
+  serialized_start=71,
+  serialized_end=158,
 )
 
 
@@ -173,8 +195,8 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=125,
-  serialized_end=278,
+  serialized_start=161,
+  serialized_end=314,
 )
 
 
@@ -204,8 +226,39 @@ _NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=280,
-  serialized_end=339,
+  serialized_start=316,
+  serialized_end=375,
+)
+
+
+_DEBUGCOMMAND = _descriptor.Descriptor(
+  name='DebugCommand',
+  full_name='khero.DebugCommand',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='command', full_name='khero.DebugCommand.command', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=377,
+  serialized_end=408,
 )
 
 
@@ -242,8 +295,8 @@ _REGISTERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=341,
-  serialized_end=394,
+  serialized_start=410,
+  serialized_end=463,
 )
 
 
@@ -266,8 +319,8 @@ _REGISTERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=396,
-  serialized_end=414,
+  serialized_start=465,
+  serialized_end=483,
 )
 
 
@@ -304,8 +357,8 @@ _LOGINREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=416,
-  serialized_end=466,
+  serialized_start=485,
+  serialized_end=535,
 )
 
 
@@ -335,8 +388,8 @@ _LOGINRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=468,
-  serialized_end=498,
+  serialized_start=537,
+  serialized_end=567,
 )
 
 
@@ -366,10 +419,11 @@ _WELCOMENOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=500,
-  serialized_end=535,
+  serialized_start=569,
+  serialized_end=604,
 )
 
+_COMMAND.fields_by_name['debug'].message_type = _DEBUGCOMMAND
 _REQUEST.fields_by_name['register'].message_type = _REGISTERREQUEST
 _REQUEST.fields_by_name['login'].message_type = _LOGINREQUEST
 _RESPONSE.fields_by_name['register'].message_type = _REGISTERRESPONSE
@@ -379,6 +433,7 @@ DESCRIPTOR.message_types_by_name['Command'] = _COMMAND
 DESCRIPTOR.message_types_by_name['Request'] = _REQUEST
 DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
 DESCRIPTOR.message_types_by_name['Notification'] = _NOTIFICATION
+DESCRIPTOR.message_types_by_name['DebugCommand'] = _DEBUGCOMMAND
 DESCRIPTOR.message_types_by_name['RegisterRequest'] = _REGISTERREQUEST
 DESCRIPTOR.message_types_by_name['RegisterResponse'] = _REGISTERRESPONSE
 DESCRIPTOR.message_types_by_name['LoginRequest'] = _LOGINREQUEST
@@ -413,6 +468,13 @@ Notification = _reflection.GeneratedProtocolMessageType('Notification', (_messag
   # @@protoc_insertion_point(class_scope:khero.Notification)
   ))
 _sym_db.RegisterMessage(Notification)
+
+DebugCommand = _reflection.GeneratedProtocolMessageType('DebugCommand', (_message.Message,), dict(
+  DESCRIPTOR = _DEBUGCOMMAND,
+  __module__ = 'message_pb2'
+  # @@protoc_insertion_point(class_scope:khero.DebugCommand)
+  ))
+_sym_db.RegisterMessage(DebugCommand)
 
 RegisterRequest = _reflection.GeneratedProtocolMessageType('RegisterRequest', (_message.Message,), dict(
   DESCRIPTOR = _REGISTERREQUEST,

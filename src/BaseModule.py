@@ -35,6 +35,7 @@ class BaseModule(Module):
             res.last_response = True
             res.login.token = 1234
             res_str = res.SerializeToString()
+            Log().d("len(reponse)="+str(len(res_str)))
             self.sendMsg(user_data, Login_Response, res_str)
 
     # 响应注册注册消息

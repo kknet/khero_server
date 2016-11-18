@@ -15,36 +15,93 @@ public final class Message {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
+   * <pre>
+   * 消息ID定义规范
+   * 前两个字节为消息模块ID
+   * 中间4位为消息类别区别值，0表示普通请求响应消息，1表示Command消息，2表示Notification
+   * 最后12位为具体的消息值，Response消息为Request消息ID+1
+   * </pre>
+   *
    * Protobuf enum {@code khero.Msg}
    */
   public enum Msg
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>Login_Request = 65537;</code>
+     * <pre>
+     * BaseModule
+     * 所有的Request和Response消息
+     * </pre>
+     *
+     * <code>Register_Request = 65537;</code>
      */
-    Login_Request(65537),
+    Register_Request(65537),
     /**
-     * <code>Login_Response = 65538;</code>
+     * <code>Register_Response = 65538;</code>
      */
-    Login_Response(65538),
+    Register_Response(65538),
     /**
-     * <code>Welcom_Notification = 131073;</code>
+     * <code>Login_Request = 65539;</code>
      */
-    Welcom_Notification(131073),
+    Login_Request(65539),
+    /**
+     * <code>Login_Response = 65540;</code>
+     */
+    Login_Response(65540),
+    /**
+     * <pre>
+     * 所有Command消息
+     * </pre>
+     *
+     * <code>Debug_Command = 69633;</code>
+     */
+    Debug_Command(69633),
+    /**
+     * <pre>
+     * 所有Nitification消息
+     * </pre>
+     *
+     * <code>Welcom_Notification = 73729;</code>
+     */
+    Welcom_Notification(73729),
     ;
 
     /**
-     * <code>Login_Request = 65537;</code>
+     * <pre>
+     * BaseModule
+     * 所有的Request和Response消息
+     * </pre>
+     *
+     * <code>Register_Request = 65537;</code>
      */
-    public static final int Login_Request_VALUE = 65537;
+    public static final int Register_Request_VALUE = 65537;
     /**
-     * <code>Login_Response = 65538;</code>
+     * <code>Register_Response = 65538;</code>
      */
-    public static final int Login_Response_VALUE = 65538;
+    public static final int Register_Response_VALUE = 65538;
     /**
-     * <code>Welcom_Notification = 131073;</code>
+     * <code>Login_Request = 65539;</code>
      */
-    public static final int Welcom_Notification_VALUE = 131073;
+    public static final int Login_Request_VALUE = 65539;
+    /**
+     * <code>Login_Response = 65540;</code>
+     */
+    public static final int Login_Response_VALUE = 65540;
+    /**
+     * <pre>
+     * 所有Command消息
+     * </pre>
+     *
+     * <code>Debug_Command = 69633;</code>
+     */
+    public static final int Debug_Command_VALUE = 69633;
+    /**
+     * <pre>
+     * 所有Nitification消息
+     * </pre>
+     *
+     * <code>Welcom_Notification = 73729;</code>
+     */
+    public static final int Welcom_Notification_VALUE = 73729;
 
 
     public final int getNumber() {
@@ -61,9 +118,12 @@ public final class Message {
 
     public static Msg forNumber(int value) {
       switch (value) {
-        case 65537: return Login_Request;
-        case 65538: return Login_Response;
-        case 131073: return Welcom_Notification;
+        case 65537: return Register_Request;
+        case 65538: return Register_Response;
+        case 65539: return Login_Request;
+        case 65540: return Login_Response;
+        case 69633: return Debug_Command;
+        case 73729: return Welcom_Notification;
         default: return null;
       }
     }
@@ -116,12 +176,33 @@ public final class Message {
   public interface CommandOrBuilder extends
       // @@protoc_insertion_point(interface_extends:khero.Command)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *包含所有的XXXCommand消息
+     * </pre>
+     *
+     * <code>optional .khero.DebugCommand debug = 1;</code>
+     */
+    boolean hasDebug();
+    /**
+     * <pre>
+     *包含所有的XXXCommand消息
+     * </pre>
+     *
+     * <code>optional .khero.DebugCommand debug = 1;</code>
+     */
+    com.kongyt.khero.messages.Message.DebugCommand getDebug();
+    /**
+     * <pre>
+     *包含所有的XXXCommand消息
+     * </pre>
+     *
+     * <code>optional .khero.DebugCommand debug = 1;</code>
+     */
+    com.kongyt.khero.messages.Message.DebugCommandOrBuilder getDebugOrBuilder();
   }
   /**
-   * <pre>
-   *包含所有的XXXCommand消息
-   * </pre>
-   *
    * Protobuf type {@code khero.Command}
    */
   public  static final class Command extends
@@ -145,6 +226,7 @@ public final class Message {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -160,6 +242,19 @@ public final class Message {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 10: {
+              com.kongyt.khero.messages.Message.DebugCommand.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = debug_.toBuilder();
+              }
+              debug_ = input.readMessage(com.kongyt.khero.messages.Message.DebugCommand.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(debug_);
+                debug_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
               break;
             }
           }
@@ -186,18 +281,61 @@ public final class Message {
               com.kongyt.khero.messages.Message.Command.class, com.kongyt.khero.messages.Message.Command.Builder.class);
     }
 
+    private int bitField0_;
+    public static final int DEBUG_FIELD_NUMBER = 1;
+    private com.kongyt.khero.messages.Message.DebugCommand debug_;
+    /**
+     * <pre>
+     *包含所有的XXXCommand消息
+     * </pre>
+     *
+     * <code>optional .khero.DebugCommand debug = 1;</code>
+     */
+    public boolean hasDebug() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *包含所有的XXXCommand消息
+     * </pre>
+     *
+     * <code>optional .khero.DebugCommand debug = 1;</code>
+     */
+    public com.kongyt.khero.messages.Message.DebugCommand getDebug() {
+      return debug_ == null ? com.kongyt.khero.messages.Message.DebugCommand.getDefaultInstance() : debug_;
+    }
+    /**
+     * <pre>
+     *包含所有的XXXCommand消息
+     * </pre>
+     *
+     * <code>optional .khero.DebugCommand debug = 1;</code>
+     */
+    public com.kongyt.khero.messages.Message.DebugCommandOrBuilder getDebugOrBuilder() {
+      return debug_ == null ? com.kongyt.khero.messages.Message.DebugCommand.getDefaultInstance() : debug_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (hasDebug()) {
+        if (!getDebug().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, getDebug());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -206,6 +344,10 @@ public final class Message {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getDebug());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -223,6 +365,11 @@ public final class Message {
       com.kongyt.khero.messages.Message.Command other = (com.kongyt.khero.messages.Message.Command) obj;
 
       boolean result = true;
+      result = result && (hasDebug() == other.hasDebug());
+      if (hasDebug()) {
+        result = result && getDebug()
+            .equals(other.getDebug());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -234,6 +381,10 @@ public final class Message {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasDebug()) {
+        hash = (37 * hash) + DEBUG_FIELD_NUMBER;
+        hash = (53 * hash) + getDebug().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -317,10 +468,6 @@ public final class Message {
       return builder;
     }
     /**
-     * <pre>
-     *包含所有的XXXCommand消息
-     * </pre>
-     *
      * Protobuf type {@code khero.Command}
      */
     public static final class Builder extends
@@ -352,10 +499,17 @@ public final class Message {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getDebugFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
+        if (debugBuilder_ == null) {
+          debug_ = null;
+        } else {
+          debugBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -378,6 +532,17 @@ public final class Message {
 
       public com.kongyt.khero.messages.Message.Command buildPartial() {
         com.kongyt.khero.messages.Message.Command result = new com.kongyt.khero.messages.Message.Command(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (debugBuilder_ == null) {
+          result.debug_ = debug_;
+        } else {
+          result.debug_ = debugBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -419,12 +584,20 @@ public final class Message {
 
       public Builder mergeFrom(com.kongyt.khero.messages.Message.Command other) {
         if (other == com.kongyt.khero.messages.Message.Command.getDefaultInstance()) return this;
+        if (other.hasDebug()) {
+          mergeDebug(other.getDebug());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
+        if (hasDebug()) {
+          if (!getDebug().isInitialized()) {
+            return false;
+          }
+        }
         return true;
       }
 
@@ -444,6 +617,161 @@ public final class Message {
           }
         }
         return this;
+      }
+      private int bitField0_;
+
+      private com.kongyt.khero.messages.Message.DebugCommand debug_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.kongyt.khero.messages.Message.DebugCommand, com.kongyt.khero.messages.Message.DebugCommand.Builder, com.kongyt.khero.messages.Message.DebugCommandOrBuilder> debugBuilder_;
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public boolean hasDebug() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public com.kongyt.khero.messages.Message.DebugCommand getDebug() {
+        if (debugBuilder_ == null) {
+          return debug_ == null ? com.kongyt.khero.messages.Message.DebugCommand.getDefaultInstance() : debug_;
+        } else {
+          return debugBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public Builder setDebug(com.kongyt.khero.messages.Message.DebugCommand value) {
+        if (debugBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          debug_ = value;
+          onChanged();
+        } else {
+          debugBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public Builder setDebug(
+          com.kongyt.khero.messages.Message.DebugCommand.Builder builderForValue) {
+        if (debugBuilder_ == null) {
+          debug_ = builderForValue.build();
+          onChanged();
+        } else {
+          debugBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public Builder mergeDebug(com.kongyt.khero.messages.Message.DebugCommand value) {
+        if (debugBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              debug_ != null &&
+              debug_ != com.kongyt.khero.messages.Message.DebugCommand.getDefaultInstance()) {
+            debug_ =
+              com.kongyt.khero.messages.Message.DebugCommand.newBuilder(debug_).mergeFrom(value).buildPartial();
+          } else {
+            debug_ = value;
+          }
+          onChanged();
+        } else {
+          debugBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public Builder clearDebug() {
+        if (debugBuilder_ == null) {
+          debug_ = null;
+          onChanged();
+        } else {
+          debugBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public com.kongyt.khero.messages.Message.DebugCommand.Builder getDebugBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getDebugFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      public com.kongyt.khero.messages.Message.DebugCommandOrBuilder getDebugOrBuilder() {
+        if (debugBuilder_ != null) {
+          return debugBuilder_.getMessageOrBuilder();
+        } else {
+          return debug_ == null ?
+              com.kongyt.khero.messages.Message.DebugCommand.getDefaultInstance() : debug_;
+        }
+      }
+      /**
+       * <pre>
+       *包含所有的XXXCommand消息
+       * </pre>
+       *
+       * <code>optional .khero.DebugCommand debug = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.kongyt.khero.messages.Message.DebugCommand, com.kongyt.khero.messages.Message.DebugCommand.Builder, com.kongyt.khero.messages.Message.DebugCommandOrBuilder> 
+          getDebugFieldBuilder() {
+        if (debugBuilder_ == null) {
+          debugBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.kongyt.khero.messages.Message.DebugCommand, com.kongyt.khero.messages.Message.DebugCommand.Builder, com.kongyt.khero.messages.Message.DebugCommandOrBuilder>(
+                  getDebug(),
+                  getParentForChildren(),
+                  isClean());
+          debug_ = null;
+        }
+        return debugBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3221,6 +3549,557 @@ public final class Message {
     }
 
     public com.kongyt.khero.messages.Message.Notification getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface DebugCommandOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:khero.DebugCommand)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string command = 1;</code>
+     */
+    boolean hasCommand();
+    /**
+     * <code>required string command = 1;</code>
+     */
+    java.lang.String getCommand();
+    /**
+     * <code>required string command = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCommandBytes();
+  }
+  /**
+   * Protobuf type {@code khero.DebugCommand}
+   */
+  public  static final class DebugCommand extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:khero.DebugCommand)
+      DebugCommandOrBuilder {
+    // Use DebugCommand.newBuilder() to construct.
+    private DebugCommand(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DebugCommand() {
+      command_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DebugCommand(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              command_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.kongyt.khero.messages.Message.internal_static_khero_DebugCommand_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.kongyt.khero.messages.Message.internal_static_khero_DebugCommand_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.kongyt.khero.messages.Message.DebugCommand.class, com.kongyt.khero.messages.Message.DebugCommand.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int COMMAND_FIELD_NUMBER = 1;
+    private volatile java.lang.Object command_;
+    /**
+     * <code>required string command = 1;</code>
+     */
+    public boolean hasCommand() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string command = 1;</code>
+     */
+    public java.lang.String getCommand() {
+      java.lang.Object ref = command_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          command_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string command = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCommandBytes() {
+      java.lang.Object ref = command_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        command_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasCommand()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, command_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, command_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.kongyt.khero.messages.Message.DebugCommand)) {
+        return super.equals(obj);
+      }
+      com.kongyt.khero.messages.Message.DebugCommand other = (com.kongyt.khero.messages.Message.DebugCommand) obj;
+
+      boolean result = true;
+      result = result && (hasCommand() == other.hasCommand());
+      if (hasCommand()) {
+        result = result && getCommand()
+            .equals(other.getCommand());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasCommand()) {
+        hash = (37 * hash) + COMMAND_FIELD_NUMBER;
+        hash = (53 * hash) + getCommand().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.kongyt.khero.messages.Message.DebugCommand parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.kongyt.khero.messages.Message.DebugCommand prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code khero.DebugCommand}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:khero.DebugCommand)
+        com.kongyt.khero.messages.Message.DebugCommandOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_DebugCommand_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_DebugCommand_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.kongyt.khero.messages.Message.DebugCommand.class, com.kongyt.khero.messages.Message.DebugCommand.Builder.class);
+      }
+
+      // Construct using com.kongyt.khero.messages.Message.DebugCommand.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        command_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.kongyt.khero.messages.Message.internal_static_khero_DebugCommand_descriptor;
+      }
+
+      public com.kongyt.khero.messages.Message.DebugCommand getDefaultInstanceForType() {
+        return com.kongyt.khero.messages.Message.DebugCommand.getDefaultInstance();
+      }
+
+      public com.kongyt.khero.messages.Message.DebugCommand build() {
+        com.kongyt.khero.messages.Message.DebugCommand result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.kongyt.khero.messages.Message.DebugCommand buildPartial() {
+        com.kongyt.khero.messages.Message.DebugCommand result = new com.kongyt.khero.messages.Message.DebugCommand(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.command_ = command_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.kongyt.khero.messages.Message.DebugCommand) {
+          return mergeFrom((com.kongyt.khero.messages.Message.DebugCommand)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.kongyt.khero.messages.Message.DebugCommand other) {
+        if (other == com.kongyt.khero.messages.Message.DebugCommand.getDefaultInstance()) return this;
+        if (other.hasCommand()) {
+          bitField0_ |= 0x00000001;
+          command_ = other.command_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasCommand()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.kongyt.khero.messages.Message.DebugCommand parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.kongyt.khero.messages.Message.DebugCommand) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object command_ = "";
+      /**
+       * <code>required string command = 1;</code>
+       */
+      public boolean hasCommand() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string command = 1;</code>
+       */
+      public java.lang.String getCommand() {
+        java.lang.Object ref = command_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            command_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string command = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCommandBytes() {
+        java.lang.Object ref = command_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          command_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string command = 1;</code>
+       */
+      public Builder setCommand(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        command_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string command = 1;</code>
+       */
+      public Builder clearCommand() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        command_ = getDefaultInstance().getCommand();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string command = 1;</code>
+       */
+      public Builder setCommandBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        command_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:khero.DebugCommand)
+    }
+
+    // @@protoc_insertion_point(class_scope:khero.DebugCommand)
+    private static final com.kongyt.khero.messages.Message.DebugCommand DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.kongyt.khero.messages.Message.DebugCommand();
+    }
+
+    public static com.kongyt.khero.messages.Message.DebugCommand getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<DebugCommand>
+        PARSER = new com.google.protobuf.AbstractParser<DebugCommand>() {
+      public DebugCommand parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new DebugCommand(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<DebugCommand> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<DebugCommand> getParserForType() {
+      return PARSER;
+    }
+
+    public com.kongyt.khero.messages.Message.DebugCommand getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -6098,6 +6977,11 @@ public final class Message {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_khero_Notification_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_khero_DebugCommand_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_khero_DebugCommand_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_khero_RegisterRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -6131,23 +7015,26 @@ public final class Message {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rmessage.proto\022\005khero\"\t\n\007Command\"W\n\007Req" +
-      "uest\022(\n\010register\030\001 \001(\0132\026.khero.RegisterR" +
-      "equest\022\"\n\005login\030\002 \001(\0132\023.khero.LoginReque" +
-      "st\"\231\001\n\010Response\022\016\n\006result\030\001 \002(\010\022\025\n\rlast_" +
-      "response\030\002 \002(\010\022\026\n\016error_describe\030\003 \001(\014\022)" +
-      "\n\010register\030\004 \001(\0132\027.khero.RegisterRespons" +
-      "e\022#\n\005login\030\005 \001(\0132\024.khero.LoginResponse\";" +
-      "\n\014Notification\022+\n\007welcome\030\001 \001(\0132\032.khero." +
-      "WelcomeNotification\"5\n\017RegisterRequest\022\020" +
-      "\n\010username\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\022\n\020Re",
-      "gisterResponse\"2\n\014LoginRequest\022\020\n\010userna" +
-      "me\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\036\n\rLoginRespo" +
-      "nse\022\r\n\005token\030\001 \002(\005\"#\n\023WelcomeNotificatio" +
-      "n\022\014\n\004text\030\001 \002(\t*K\n\003Msg\022\023\n\rLogin_Request\020" +
-      "\201\200\004\022\024\n\016Login_Response\020\202\200\004\022\031\n\023Welcom_Noti" +
-      "fication\020\201\200\010B\033\n\031com.kongyt.khero.message" +
-      "s"
+      "\n\rmessage.proto\022\005khero\"-\n\007Command\022\"\n\005deb" +
+      "ug\030\001 \001(\0132\023.khero.DebugCommand\"W\n\007Request" +
+      "\022(\n\010register\030\001 \001(\0132\026.khero.RegisterReque" +
+      "st\022\"\n\005login\030\002 \001(\0132\023.khero.LoginRequest\"\231" +
+      "\001\n\010Response\022\016\n\006result\030\001 \002(\010\022\025\n\rlast_resp" +
+      "onse\030\002 \002(\010\022\026\n\016error_describe\030\003 \001(\014\022)\n\010re" +
+      "gister\030\004 \001(\0132\027.khero.RegisterResponse\022#\n" +
+      "\005login\030\005 \001(\0132\024.khero.LoginResponse\";\n\014No" +
+      "tification\022+\n\007welcome\030\001 \001(\0132\032.khero.Welc" +
+      "omeNotification\"\037\n\014DebugCommand\022\017\n\007comma",
+      "nd\030\001 \002(\t\"5\n\017RegisterRequest\022\020\n\010username\030" +
+      "\001 \002(\t\022\020\n\010password\030\002 \002(\t\"\022\n\020RegisterRespo" +
+      "nse\"2\n\014LoginRequest\022\020\n\010username\030\001 \002(\t\022\020\n" +
+      "\010password\030\002 \002(\t\"\036\n\rLoginResponse\022\r\n\005toke" +
+      "n\030\001 \002(\005\"#\n\023WelcomeNotification\022\014\n\004text\030\001" +
+      " \002(\t*\221\001\n\003Msg\022\026\n\020Register_Request\020\201\200\004\022\027\n\021" +
+      "Register_Response\020\202\200\004\022\023\n\rLogin_Request\020\203" +
+      "\200\004\022\024\n\016Login_Response\020\204\200\004\022\023\n\rDebug_Comman" +
+      "d\020\201\240\004\022\031\n\023Welcom_Notification\020\201\300\004B\033\n\031com." +
+      "kongyt.khero.messages"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6166,7 +7053,7 @@ public final class Message {
     internal_static_khero_Command_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_Command_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "Debug", });
     internal_static_khero_Request_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_khero_Request_fieldAccessorTable = new
@@ -6185,32 +7072,38 @@ public final class Message {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_Notification_descriptor,
         new java.lang.String[] { "Welcome", });
-    internal_static_khero_RegisterRequest_descriptor =
+    internal_static_khero_DebugCommand_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_khero_DebugCommand_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_khero_DebugCommand_descriptor,
+        new java.lang.String[] { "Command", });
+    internal_static_khero_RegisterRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_khero_RegisterRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_RegisterRequest_descriptor,
         new java.lang.String[] { "Username", "Password", });
     internal_static_khero_RegisterResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_khero_RegisterResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_RegisterResponse_descriptor,
         new java.lang.String[] { });
     internal_static_khero_LoginRequest_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_khero_LoginRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_LoginRequest_descriptor,
         new java.lang.String[] { "Username", "Password", });
     internal_static_khero_LoginResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_khero_LoginResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_LoginResponse_descriptor,
         new java.lang.String[] { "Token", });
     internal_static_khero_WelcomeNotification_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_khero_WelcomeNotification_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_khero_WelcomeNotification_descriptor,
