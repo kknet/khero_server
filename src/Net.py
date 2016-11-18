@@ -7,7 +7,8 @@ import struct
 
 from MsgHandler import *
 from Log import *
-
+import time
+from Timer import *
 
 class Net:
     def __init__(self, ip, port, timeout):
@@ -39,6 +40,7 @@ class Net:
         self.run_flag = True
 
     def run(self):
+        t1 = time.time()
         while self.run_flag:
             try:
                 events = self.epl.poll(self.timeout)
@@ -108,6 +110,10 @@ class Net:
                         Log().d("发送数据,客户端:" + str(sock.getpeername()))
                     else:
                         self.epl.modify(fd, EPOLLIN)
+            t2 = time.time()
+            delta = t2 - t1
+            t1 = t2
+            TM().step(delta)
         for fd in self.fd_to_socket:
             self.epl.unregister(fd)
             self.fd_to_socket[fd].close()

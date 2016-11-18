@@ -19,7 +19,7 @@ def usr1Handler(signo, frame):
 
 class Server:
     def __init__(self):
-        self._ip = "192.168.0.102"
+        self._ip = "192.168.31.128"
         self._port = 8888
         self._timeout = 10
         self._net = Net(self._ip, self._port, self._timeout)
