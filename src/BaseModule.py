@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from Role import *
 from socket import *
 from select import *
 from MsgHandler import *
@@ -30,6 +31,11 @@ class BaseModule(Module):
         req.ParseFromString(user_data["msg_data"])
         if req.HasField('login'):
             Log().d('onLoginRequest(' + req.login.username +"," + req.login.password + ")")
+            # TODO
+            role = Role()
+            role.setUserData(user_data)
+            RoleManager().addRole()
+
             res = Response()
             res.result = True
             res.last_response = True
@@ -37,6 +43,8 @@ class BaseModule(Module):
             res_str = res.SerializeToString()
             Log().d("len(reponse)="+str(len(res_str)))
             self.sendMsg(user_data, Login_Response, res_str)
+
+
 
     # 响应注册注册消息
     def onRegisterRequest(self, user_data):
